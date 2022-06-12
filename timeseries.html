@@ -52,6 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Klasikasi" href="klasifikasi.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,7 +112,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="markdown.html">
    Markdown Files
@@ -130,6 +131,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="klasifikasi.html">
    Klasikasi
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Synthetic time series with anomalies
   </a>
  </li>
 </ul>
@@ -338,92 +344,104 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-syntheticts-class">
-   The
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     SyntheticTS
-    </span>
-   </code>
-   class
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Synthetic time series with anomalies
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameters">
-     Parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-is-a-process">
-     What is a
-     <em>
-      ‘process’
-     </em>
-     ?
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example">
-   Example
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-series">
+   Time series
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-is-the-object">
-     What is the object?
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-syntheticts-class">
+     The
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       SyntheticTS
+      </span>
+     </code>
+     class
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parameters">
+       Parameters
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#what-is-a-process">
+       What is a
+       <em>
+        ‘process’
+       </em>
+       ?
+      </a>
+     </li>
+    </ul>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cannot-plot-w-o-initiating-the-process">
-     Cannot plot w/o initiating the process
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#normal-process-data">
-     Normal process data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#anomalize-the-data">
-     Anomalize the data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-sided-anomaly">
-     One-sided anomaly
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#varying-scales-of-anomaly">
-     Varying scales of anomaly
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#varying-fraction-of-anomalies-1-to-40">
-     Varying fraction of anomalies (1% to 40%)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#introduce-a-positive-drift">
-     Introduce a positive drift
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#negative-drift-at-an-arbitrary-location">
-     Negative drift at an arbitrary location
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#chunked-group-of-anomalies">
-     Chunked (group) of anomalies
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-sided-chunked-anomalies">
-     One-sided chunked anomalies
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#what-is-the-object">
+       What is the object?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cannot-plot-w-o-initiating-the-process">
+       Cannot plot w/o initiating the process
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#normal-process-data">
+       Normal process data
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#anomalize-the-data">
+       Anomalize the data
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#one-sided-anomaly">
+       One-sided anomaly
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#varying-scales-of-anomaly">
+       Varying scales of anomaly
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#varying-fraction-of-anomalies-1-to-40">
+       Varying fraction of anomalies (1% to 40%)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#introduce-a-positive-drift">
+       Introduce a positive drift
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#negative-drift-at-an-arbitrary-location">
+       Negative drift at an arbitrary location
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#chunked-group-of-anomalies">
+       Chunked (group) of anomalies
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#one-sided-chunked-anomalies">
+       One-sided chunked anomalies
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -446,92 +464,104 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-syntheticts-class">
-   The
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     SyntheticTS
-    </span>
-   </code>
-   class
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Synthetic time series with anomalies
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameters">
-     Parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-is-a-process">
-     What is a
-     <em>
-      ‘process’
-     </em>
-     ?
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example">
-   Example
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-series">
+   Time series
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-is-the-object">
-     What is the object?
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-syntheticts-class">
+     The
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       SyntheticTS
+      </span>
+     </code>
+     class
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parameters">
+       Parameters
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#what-is-a-process">
+       What is a
+       <em>
+        ‘process’
+       </em>
+       ?
+      </a>
+     </li>
+    </ul>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cannot-plot-w-o-initiating-the-process">
-     Cannot plot w/o initiating the process
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#normal-process-data">
-     Normal process data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#anomalize-the-data">
-     Anomalize the data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-sided-anomaly">
-     One-sided anomaly
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#varying-scales-of-anomaly">
-     Varying scales of anomaly
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#varying-fraction-of-anomalies-1-to-40">
-     Varying fraction of anomalies (1% to 40%)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#introduce-a-positive-drift">
-     Introduce a positive drift
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#negative-drift-at-an-arbitrary-location">
-     Negative drift at an arbitrary location
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#chunked-group-of-anomalies">
-     Chunked (group) of anomalies
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-sided-chunked-anomalies">
-     One-sided chunked anomalies
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#what-is-the-object">
+       What is the object?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cannot-plot-w-o-initiating-the-process">
+       Cannot plot w/o initiating the process
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#normal-process-data">
+       Normal process data
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#anomalize-the-data">
+       Anomalize the data
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#one-sided-anomaly">
+       One-sided anomaly
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#varying-scales-of-anomaly">
+       Varying scales of anomaly
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#varying-fraction-of-anomalies-1-to-40">
+       Varying fraction of anomalies (1% to 40%)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#introduce-a-positive-drift">
+       Introduce a positive drift
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#negative-drift-at-an-arbitrary-location">
+       Negative drift at an arbitrary location
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#chunked-group-of-anomalies">
+       Chunked (group) of anomalies
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#one-sided-chunked-anomalies">
+       One-sided chunked anomalies
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -547,6 +577,9 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="synthetic-time-series-with-anomalies">
 <h1>Synthetic time series with anomalies<a class="headerlink" href="#synthetic-time-series-with-anomalies" title="Permalink to this headline">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="time-series">
+<h1>Time series<a class="headerlink" href="#time-series" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -1012,27 +1045,27 @@ Process time (minutes): 15
     <tr>
       <th>0</th>
       <td>2021-05-01 00:00:00</td>
-      <td>90.593883</td>
+      <td>107.272035</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2021-05-01 00:15:00</td>
-      <td>102.409773</td>
+      <td>98.741469</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2021-05-01 00:30:00</td>
-      <td>97.284685</td>
+      <td>101.804470</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2021-05-01 00:45:00</td>
-      <td>108.057631</td>
+      <td>94.473197</td>
     </tr>
     <tr>
       <th>4</th>
       <td>2021-05-01 01:00:00</td>
-      <td>104.290393</td>
+      <td>99.833008</td>
     </tr>
   </tbody>
 </table>
@@ -1045,7 +1078,7 @@ Process time (minutes): 15
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/timeseries_14_0.png" src="_images/timeseries_14_0.png" />
+<img alt="_images/timeseries_15_0.png" src="_images/timeseries_15_0.png" />
 </div>
 </div>
 </section>
@@ -1085,27 +1118,27 @@ Process time (minutes): 15
     <tr>
       <th>0</th>
       <td>2021-05-01 00:00:00</td>
-      <td>90.593883</td>
+      <td>107.272035</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2021-05-01 00:15:00</td>
-      <td>102.409773</td>
+      <td>98.741469</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2021-05-01 00:30:00</td>
-      <td>97.284685</td>
+      <td>101.804470</td>
     </tr>
     <tr>
       <th>3</th>
       <td>2021-05-01 00:45:00</td>
-      <td>108.057631</td>
+      <td>94.473197</td>
     </tr>
     <tr>
       <th>4</th>
       <td>2021-05-01 01:00:00</td>
-      <td>104.290393</td>
+      <td>99.833008</td>
     </tr>
   </tbody>
 </table>
@@ -1118,7 +1151,7 @@ Process time (minutes): 15
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/timeseries_17_0.png" src="_images/timeseries_17_0.png" />
+<img alt="_images/timeseries_18_0.png" src="_images/timeseries_18_0.png" />
 </div>
 </div>
 </section>
@@ -1136,7 +1169,7 @@ Process time (minutes): 15
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/timeseries_19_0.png" src="_images/timeseries_19_0.png" />
+<img alt="_images/timeseries_20_0.png" src="_images/timeseries_20_0.png" />
 </div>
 </div>
 </section>
@@ -1154,11 +1187,11 @@ Process time (minutes): 15
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/timeseries_21_0.png" src="_images/timeseries_21_0.png" />
-<img alt="_images/timeseries_21_1.png" src="_images/timeseries_21_1.png" />
-<img alt="_images/timeseries_21_2.png" src="_images/timeseries_21_2.png" />
-<img alt="_images/timeseries_21_3.png" src="_images/timeseries_21_3.png" />
-<img alt="_images/timeseries_21_4.png" src="_images/timeseries_21_4.png" />
+<img alt="_images/timeseries_22_0.png" src="_images/timeseries_22_0.png" />
+<img alt="_images/timeseries_22_1.png" src="_images/timeseries_22_1.png" />
+<img alt="_images/timeseries_22_2.png" src="_images/timeseries_22_2.png" />
+<img alt="_images/timeseries_22_3.png" src="_images/timeseries_22_3.png" />
+<img alt="_images/timeseries_22_4.png" src="_images/timeseries_22_4.png" />
 </div>
 </div>
 </section>
@@ -1176,11 +1209,11 @@ Process time (minutes): 15
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/timeseries_23_0.png" src="_images/timeseries_23_0.png" />
-<img alt="_images/timeseries_23_1.png" src="_images/timeseries_23_1.png" />
-<img alt="_images/timeseries_23_2.png" src="_images/timeseries_23_2.png" />
-<img alt="_images/timeseries_23_3.png" src="_images/timeseries_23_3.png" />
-<img alt="_images/timeseries_23_4.png" src="_images/timeseries_23_4.png" />
+<img alt="_images/timeseries_24_0.png" src="_images/timeseries_24_0.png" />
+<img alt="_images/timeseries_24_1.png" src="_images/timeseries_24_1.png" />
+<img alt="_images/timeseries_24_2.png" src="_images/timeseries_24_2.png" />
+<img alt="_images/timeseries_24_3.png" src="_images/timeseries_24_3.png" />
+<img alt="_images/timeseries_24_4.png" src="_images/timeseries_24_4.png" />
 </div>
 </div>
 </section>
@@ -1197,7 +1230,7 @@ Process time (minutes): 15
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/timeseries_25_0.png" src="_images/timeseries_25_0.png" />
+<img alt="_images/timeseries_26_0.png" src="_images/timeseries_26_0.png" />
 </div>
 </div>
 </section>
@@ -1226,9 +1259,9 @@ Process time (minutes): 15
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/timeseries_27_0.png" src="_images/timeseries_27_0.png" />
-<img alt="_images/timeseries_27_1.png" src="_images/timeseries_27_1.png" />
-<img alt="_images/timeseries_27_2.png" src="_images/timeseries_27_2.png" />
+<img alt="_images/timeseries_28_0.png" src="_images/timeseries_28_0.png" />
+<img alt="_images/timeseries_28_1.png" src="_images/timeseries_28_1.png" />
+<img alt="_images/timeseries_28_2.png" src="_images/timeseries_28_2.png" />
 </div>
 </div>
 </section>
@@ -1255,37 +1288,37 @@ Process time (minutes): 15
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_29_1.png" src="_images/timeseries_29_1.png" />
+<img alt="_images/timeseries_30_1.png" src="_images/timeseries_30_1.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 3 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_29_3.png" src="_images/timeseries_29_3.png" />
+<img alt="_images/timeseries_30_3.png" src="_images/timeseries_30_3.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 4 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_29_5.png" src="_images/timeseries_29_5.png" />
+<img alt="_images/timeseries_30_5.png" src="_images/timeseries_30_5.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 5 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_29_7.png" src="_images/timeseries_29_7.png" />
+<img alt="_images/timeseries_30_7.png" src="_images/timeseries_30_7.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 6 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_29_9.png" src="_images/timeseries_29_9.png" />
+<img alt="_images/timeseries_30_9.png" src="_images/timeseries_30_9.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 7 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_29_11.png" src="_images/timeseries_29_11.png" />
+<img alt="_images/timeseries_30_11.png" src="_images/timeseries_30_11.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 8 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_29_13.png" src="_images/timeseries_29_13.png" />
+<img alt="_images/timeseries_30_13.png" src="_images/timeseries_30_13.png" />
 </div>
 </div>
 </section>
@@ -1313,37 +1346,37 @@ Process time (minutes): 15
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_31_1.png" src="_images/timeseries_31_1.png" />
+<img alt="_images/timeseries_32_1.png" src="_images/timeseries_32_1.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 3 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_31_3.png" src="_images/timeseries_31_3.png" />
+<img alt="_images/timeseries_32_3.png" src="_images/timeseries_32_3.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 4 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_31_5.png" src="_images/timeseries_31_5.png" />
+<img alt="_images/timeseries_32_5.png" src="_images/timeseries_32_5.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 5 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_31_7.png" src="_images/timeseries_31_7.png" />
+<img alt="_images/timeseries_32_7.png" src="_images/timeseries_32_7.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 6 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_31_9.png" src="_images/timeseries_31_9.png" />
+<img alt="_images/timeseries_32_9.png" src="_images/timeseries_32_9.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 7 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_31_11.png" src="_images/timeseries_31_11.png" />
+<img alt="_images/timeseries_32_11.png" src="_images/timeseries_32_11.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 8 chunks
 ==================================================
 </pre></div>
 </div>
-<img alt="_images/timeseries_31_13.png" src="_images/timeseries_31_13.png" />
+<img alt="_images/timeseries_32_13.png" src="_images/timeseries_32_13.png" />
 </div>
 </div>
 </section>
@@ -1377,6 +1410,13 @@ Process time (minutes): 15
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="klasifikasi.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Klasikasi</p>
+        </div>
+    </a>
 </div>
             </footer>
         </div>
