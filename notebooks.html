@@ -575,6 +575,13 @@ with your book. For more information about this, see <a class="reference externa
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;TOTEMP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
 </pre></div>
 </div>
@@ -604,6 +611,7 @@ with your book. For more information about this, see <a class="reference externa
       <th>ARMED</th>
       <th>POP</th>
       <th>YEAR</th>
+      <th>TOTEMP</th>
     </tr>
   </thead>
   <tbody>
@@ -615,6 +623,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>1590.0</td>
       <td>107608.0</td>
       <td>1947.0</td>
+      <td>60323.0</td>
     </tr>
     <tr>
       <th>1</th>
@@ -624,6 +633,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>1456.0</td>
       <td>108632.0</td>
       <td>1948.0</td>
+      <td>61122.0</td>
     </tr>
     <tr>
       <th>2</th>
@@ -633,6 +643,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>1616.0</td>
       <td>109773.0</td>
       <td>1949.0</td>
+      <td>60171.0</td>
     </tr>
     <tr>
       <th>3</th>
@@ -642,6 +653,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>1650.0</td>
       <td>110929.0</td>
       <td>1950.0</td>
+      <td>61187.0</td>
     </tr>
     <tr>
       <th>4</th>
@@ -651,6 +663,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>3099.0</td>
       <td>112075.0</td>
       <td>1951.0</td>
+      <td>63221.0</td>
     </tr>
     <tr>
       <th>5</th>
@@ -660,6 +673,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>3594.0</td>
       <td>113270.0</td>
       <td>1952.0</td>
+      <td>63639.0</td>
     </tr>
     <tr>
       <th>6</th>
@@ -669,6 +683,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>3547.0</td>
       <td>115094.0</td>
       <td>1953.0</td>
+      <td>64989.0</td>
     </tr>
     <tr>
       <th>7</th>
@@ -678,6 +693,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>3350.0</td>
       <td>116219.0</td>
       <td>1954.0</td>
+      <td>63761.0</td>
     </tr>
     <tr>
       <th>8</th>
@@ -687,6 +703,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>3048.0</td>
       <td>117388.0</td>
       <td>1955.0</td>
+      <td>66019.0</td>
     </tr>
     <tr>
       <th>9</th>
@@ -696,6 +713,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>2857.0</td>
       <td>118734.0</td>
       <td>1956.0</td>
+      <td>67857.0</td>
     </tr>
     <tr>
       <th>10</th>
@@ -705,6 +723,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>2798.0</td>
       <td>120445.0</td>
       <td>1957.0</td>
+      <td>68169.0</td>
     </tr>
     <tr>
       <th>11</th>
@@ -714,6 +733,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>2637.0</td>
       <td>121950.0</td>
       <td>1958.0</td>
+      <td>66513.0</td>
     </tr>
     <tr>
       <th>12</th>
@@ -723,6 +743,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>2552.0</td>
       <td>123366.0</td>
       <td>1959.0</td>
+      <td>68655.0</td>
     </tr>
     <tr>
       <th>13</th>
@@ -732,6 +753,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>2514.0</td>
       <td>125368.0</td>
       <td>1960.0</td>
+      <td>69564.0</td>
     </tr>
     <tr>
       <th>14</th>
@@ -741,6 +763,7 @@ with your book. For more information about this, see <a class="reference externa
       <td>2572.0</td>
       <td>127852.0</td>
       <td>1961.0</td>
+      <td>69331.0</td>
     </tr>
     <tr>
       <th>15</th>
@@ -750,10 +773,65 @@ with your book. For more information about this, see <a class="reference externa
       <td>2827.0</td>
       <td>130081.0</td>
       <td>1962.0</td>
+      <td>70551.0</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gnp</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;GNP&#39;</span><span class="p">]</span>
+<span class="n">totemp</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;TOTEMP&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">R</span> -i totemp,gnp plot(gnp, totemp)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/notebooks_14_0.png" src="_images/notebooks_14_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span>
+# Least-squares regression
+fit &lt;- lm(totemp ~ gnp)
+# Display the coefficients of the fit.
+print(fit$coefficients)
+# Plot the data points.
+plot(gnp, totemp)
+# And plot the linear regression.
+abline(fit)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> (Intercept) 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         gnp 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.184359e+04 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.475229e-02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<img alt="_images/notebooks_15_6.png" src="_images/notebooks_15_6.png" />
+</div>
 </div>
 </section>
 
