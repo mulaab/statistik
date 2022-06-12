@@ -1,0 +1,1405 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Synthetic time series with anomalies &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks.html">
+   Jupyter book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="klasifikasi.html">
+   Klasikasi
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mulaab/statistik/main?urlpath=tree/docs/timeseries.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/mulaab/statistik"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mulaab/statistik/issues/new?title=Issue%20on%20page%20%2Ftimeseries.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/timeseries.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-syntheticts-class">
+   The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     SyntheticTS
+    </span>
+   </code>
+   class
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameters">
+     Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-a-process">
+     What is a
+     <em>
+      ‘process’
+     </em>
+     ?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example">
+   Example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-the-object">
+     What is the object?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cannot-plot-w-o-initiating-the-process">
+     Cannot plot w/o initiating the process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normal-process-data">
+     Normal process data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#anomalize-the-data">
+     Anomalize the data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-sided-anomaly">
+     One-sided anomaly
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#varying-scales-of-anomaly">
+     Varying scales of anomaly
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#varying-fraction-of-anomalies-1-to-40">
+     Varying fraction of anomalies (1% to 40%)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introduce-a-positive-drift">
+     Introduce a positive drift
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#negative-drift-at-an-arbitrary-location">
+     Negative drift at an arbitrary location
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chunked-group-of-anomalies">
+     Chunked (group) of anomalies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-sided-chunked-anomalies">
+     One-sided chunked anomalies
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Synthetic time series with anomalies</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-syntheticts-class">
+   The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     SyntheticTS
+    </span>
+   </code>
+   class
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameters">
+     Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-a-process">
+     What is a
+     <em>
+      ‘process’
+     </em>
+     ?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example">
+   Example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-the-object">
+     What is the object?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cannot-plot-w-o-initiating-the-process">
+     Cannot plot w/o initiating the process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normal-process-data">
+     Normal process data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#anomalize-the-data">
+     Anomalize the data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-sided-anomaly">
+     One-sided anomaly
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#varying-scales-of-anomaly">
+     Varying scales of anomaly
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#varying-fraction-of-anomalies-1-to-40">
+     Varying fraction of anomalies (1% to 40%)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introduce-a-positive-drift">
+     Introduce a positive drift
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#negative-drift-at-an-arbitrary-location">
+     Negative drift at an arbitrary location
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chunked-group-of-anomalies">
+     Chunked (group) of anomalies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-sided-chunked-anomalies">
+     One-sided chunked anomalies
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="synthetic-time-series-with-anomalies">
+<h1>Synthetic time series with anomalies<a class="headerlink" href="#synthetic-time-series-with-anomalies" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#from timeseries import SyntheticTS</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-syntheticts-class">
+<h2>The <code class="docutils literal notranslate"><span class="pre">SyntheticTS</span></code> class<a class="headerlink" href="#the-syntheticts-class" title="Permalink to this headline">#</a></h2>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h3>
+<p>It takes three parameters for initialization.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">start_time</span></code>: Start time in the format ‘YYYY-MM-DD hh:mm:ss’</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end_time</span></code>: End time in the format ‘YYYY-MM-DD hh:mm:ss’</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">process_time_mins</span></code> : Time (in minutes) for a unit process e.g.</p>
+<ul>
+<li><p>mutual alignment of multiple machine parts</p></li>
+<li><p>deposition of a chemical compound on a surface</p></li>
+<li><p>a specific gas flow sequence (in a particular machine) in a semiconductor fab</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="what-is-a-process">
+<h3>What is a <em>‘process’</em>?<a class="headerlink" href="#what-is-a-process" title="Permalink to this headline">#</a></h3>
+<p>A simple illustration is shown below</p>
+<p><img alt="process-1" src="https://raw.githubusercontent.com/tirthajyoti/Synthetic-data-gen/master/images/Time-series-process-1.JPG" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SyntheticTS</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base synthetic timeseries class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="o">=</span><span class="s2">&quot;2021-01-01 00:00:00&quot;</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="o">=</span><span class="s2">&quot;2021-01-02 00:00:00&quot;</span><span class="p">,</span>
+        <span class="n">process_time_mins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            start_time (str): Start time in the format &#39;YYYY-MM-DD hh:mm:ss&#39;</span>
+<span class="sd">            end_time (str): End time in the format &#39;YYYY-MM-DD hh:mm:ss&#39;</span>
+<span class="sd">            process_time_mins (float): Time (in minutes) for the unit process</span>
+
+<span class="sd">        Returns: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">start_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_time</span> <span class="o">=</span> <span class="n">end_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_time</span> <span class="o">=</span> <span class="n">process_time_mins</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_duration_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end_time</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_time</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_minutes_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_duration_</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_size_</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes_</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process_time</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">end_time</span><span class="p">,</span>
+            <span class="n">step</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">process_time</span><span class="p">,</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;datetime64[m]&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_normal_flag_</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_anomaly_flag_</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_drifted_flag_</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Customized synthetic time series class&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;Parameters</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">30</span>
+            <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\n</span><span class="s2">Start time: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">start_time</span><span class="si">}</span><span class="se">\n</span><span class="s2">End time: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">end_time</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">Process time (minutes): </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">process_time</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">desc</span>
+
+    <span class="k">def</span> <span class="nf">normal_process</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initiates the normal process data</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            loc (float): Parameter (mean) for the underlying Gaussian distribution</span>
+<span class="sd">            scale (float): Parameter (std.dev) for the underlying Gaussian distribution</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Pandas DataFrame: If `return_df=True` returns a dataframe with two columns -</span>
+<span class="sd">            `time` with the datetime values, `normal_data` with the normal process data</span>
+<span class="sd">            numpy.ndarray: If `return_df=False` returns just the array of normal process data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">=</span> <span class="n">loc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_size_</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normal_data</span> <span class="o">=</span> <span class="n">arr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_normal_flag_</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">return_df</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_arr</span><span class="p">,</span> <span class="s2">&quot;normal_data&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal_data</span><span class="p">})</span>
+            <span class="k">return</span> <span class="n">df</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal_data</span>
+
+    <span class="k">def</span> <span class="nf">anomalize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">anomaly_frac</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">anomaly_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">one_sided</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Induces anomalies in the normal process</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">        anomaly_frac (float): Fraction of anomalies</span>
+<span class="sd">        anomaly_scale (float): Scale factor of anomalies. The range of the normal data will be scaled by this factor to inject anomalies.</span>
+<span class="sd">        Any positive number is accepted but a number &gt; 1.0 is needed to create meaningful anomalies/outliers.</span>
+<span class="sd">        one_sided (bool): Indicates whether the anomalies/outliers are one-sided in magnitude</span>
+<span class="sd">        i.e. they are mostly higher in magnitude than the normal process data. Default=False</span>
+<span class="sd">        i.e. outliers appear in both smaller and larger magnitude compared to the normal process data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Pandas DataFrame: If `return_df=True` returns a dataframe with two columns -</span>
+<span class="sd">            `time` with the datetime values, `anomaly_data` with the anomalized data</span>
+<span class="sd">            numpy.ndarray: If `return_df=False` returns just the array of the anomalized data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normal_flag_</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normal process is not initialized. Cannot anomalize&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="n">anomaly_frac</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">anomaly_frac</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Anomaly fraction must be between 0.0 and 1.0&quot;</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">anomaly_scale</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Anomaly scale must be a number gerater than 0.0&quot;</span>
+        <span class="p">)</span>
+        <span class="n">new_arr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">arr_min</span> <span class="o">=</span> <span class="n">new_arr</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">arr_max</span> <span class="o">=</span> <span class="n">new_arr</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">no_anomalies</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_size_</span> <span class="o">*</span> <span class="n">anomaly_frac</span><span class="p">)</span>
+        <span class="n">idx_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_size_</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">no_anomalies</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">idx_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">one_sided</span><span class="p">:</span>
+                <span class="n">new_arr</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=</span><span class="n">arr_min</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">anomaly_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">arr_max</span> <span class="o">-</span> <span class="n">arr_min</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_arr</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span>
+                    <span class="n">low</span><span class="o">=-</span><span class="n">anomaly_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">arr_max</span> <span class="o">-</span> <span class="n">arr_min</span><span class="p">),</span>
+                    <span class="n">high</span><span class="o">=</span><span class="n">anomaly_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">arr_max</span> <span class="o">-</span> <span class="n">arr_min</span><span class="p">),</span>
+                <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">anomalized_data</span> <span class="o">=</span> <span class="n">new_arr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_anomaly_flag_</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">return_df</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_arr</span><span class="p">,</span> <span class="s2">&quot;anomaly_data&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">anomalized_data</span><span class="p">}</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">df</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">anomalized_data</span>
+
+    <span class="k">def</span> <span class="nf">_chunk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">num_chunk</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="n">ano_scale</span><span class="p">,</span> <span class="n">one_sided</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">a_max</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">a_min</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">idx_chunks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">data_chunks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">idx_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
+        <span class="n">div</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_chunk</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">),</span> <span class="n">div</span><span class="p">):</span>
+            <span class="n">idx_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx_a</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">div</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">idx_chunks</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">tmpa</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="n">mid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tmpa</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mid</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">chunk_size</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">mid</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">chunk_size</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">one_sided</span><span class="p">:</span>
+                    <span class="n">tmpa</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span>
+                        <span class="n">low</span><span class="o">=</span><span class="n">a_min</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">ano_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">a_max</span> <span class="o">-</span> <span class="n">a_min</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tmpa</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span>
+                        <span class="n">low</span><span class="o">=-</span><span class="n">ano_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">a_max</span> <span class="o">-</span> <span class="n">a_min</span><span class="p">),</span>
+                        <span class="n">high</span><span class="o">=</span><span class="n">ano_scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">a_max</span> <span class="o">-</span> <span class="n">a_min</span><span class="p">),</span>
+                    <span class="p">)</span>
+            <span class="n">data_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmpa</span><span class="p">)</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data_chunks</span><span class="p">:</span>
+            <span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">a1</span>
+
+    <span class="k">def</span> <span class="nf">chunk_anomalize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">num_chunks</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">anomaly_frac</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+        <span class="n">anomaly_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">one_sided</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Induces anomaly chunks in the normal process data</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">        num_chunks (int): Number of chunked (grouped) anomalies</span>
+<span class="sd">        anomaly_frac (float): Fraction of anomalies</span>
+<span class="sd">        anomaly_scale (float): Scale factor of anomalies. The range of the normal data will be scaled by this factor to inject anomalies.</span>
+<span class="sd">        Any positive number is accepted but a number &gt; 1.0 is needed to create meaningful anomalies/outliers.</span>
+<span class="sd">        one_sided (bool): Indicates whether the anomalies/outliers are one-sided in magnitude</span>
+<span class="sd">        i.e. they are mostly higher in magnitude than the normal process data. Default=False</span>
+<span class="sd">        i.e. outliers appear in both smaller and larger magnitude compared to the normal process data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Pandas DataFrame: If `return_df=True` returns a dataframe with two columns -</span>
+<span class="sd">            `time` with the datetime values, `anomaly_data` with the anomalized data</span>
+<span class="sd">            numpy.ndarray: If `return_df=False` returns just the array of the anomalized data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normal_flag_</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normal process is not initialized. Cannot anomalize&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_chunks</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">num_chunks</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Number of chunks must be a positive integer&quot;</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">anomaly_frac</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">anomaly_frac</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Anomaly fraction must be between 0.0 and 1.0&quot;</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">anomaly_scale</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Anomaly scale must be a number gerater than 0.0&quot;</span>
+        <span class="p">)</span>
+        <span class="n">no_anomalies</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_size_</span> <span class="o">*</span> <span class="n">anomaly_frac</span><span class="p">)</span>
+        <span class="n">no_anomalies_chunk</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">no_anomalies</span> <span class="o">/</span> <span class="n">num_chunks</span><span class="p">)</span>
+        <span class="n">anomalies_last_chunk</span> <span class="o">=</span> <span class="n">no_anomalies</span> <span class="o">-</span> <span class="p">(</span><span class="n">no_anomalies_chunk</span> <span class="o">*</span> <span class="n">num_chunks</span><span class="p">)</span>
+        <span class="n">new_arr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">new_arr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chunk</span><span class="p">(</span>
+            <span class="n">arr</span><span class="o">=</span><span class="n">new_arr</span><span class="p">,</span>
+            <span class="n">num_chunk</span><span class="o">=</span><span class="n">num_chunks</span><span class="p">,</span>
+            <span class="n">chunk_size</span><span class="o">=</span><span class="n">no_anomalies_chunk</span><span class="p">,</span>
+            <span class="n">ano_scale</span><span class="o">=</span><span class="n">anomaly_scale</span><span class="p">,</span>
+            <span class="n">one_sided</span><span class="o">=</span><span class="n">one_sided</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chunk_anomaly_data</span> <span class="o">=</span> <span class="n">new_arr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_anomaly_flag_</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">return_df</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_arr</span><span class="p">,</span> <span class="s2">&quot;anomaly_data&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk_anomaly_data</span><span class="p">}</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">df</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk_anomaly_data</span>
+
+    <span class="k">def</span> <span class="nf">drift</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">pct_drift_mean</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">pct_drift_spread</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">time_drift</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Introduces data drift</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">        pct_drift_mean (float): Percentage of mean drift.</span>
+<span class="sd">        pct_drift_spread (float): Percentage change in the spread of the data.</span>
+<span class="sd">        time_drift (str): The time at which drift starts in the format &#39;YYYY-MM-DD hh:mm:ss&#39;.</span>
+<span class="sd">        Will be converted and processed internally as a numpy.datetime64 object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Pandas DataFrame: If `return_df=True` returns a dataframe with two columns -</span>
+<span class="sd">            `time` with the datetime values, `drifted_data` with the data after drift happens</span>
+<span class="sd">            numpy.ndarray: If `return_df=False` returns just the array of the drifted data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pct_drift_mean_</span> <span class="o">=</span> <span class="n">pct_drift_mean</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pct_drift_spread_</span> <span class="o">=</span> <span class="n">pct_drift_spread</span>
+        <span class="k">if</span> <span class="n">time_drift</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">drift_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end_time</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_duration_</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_drift_time_</span> <span class="o">=</span> <span class="n">drift_time</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_drift_time_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="n">time_drift</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_duration_before_drift_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_drift_time_</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_drift_idx_</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_duration_before_drift_</span>
+            <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process_time</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">before_drift_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">anomalized_data</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_drift_idx_</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_drift_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">anomalized_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_drift_idx_</span> <span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">after_drift_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">after_drift_data</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">after_drift_data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pct_drift_mean_</span> <span class="o">/</span> <span class="mi">100</span>
+        <span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pct_drift_spread_</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drifted_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">before_drift_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">after_drift_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_drifted_flag_</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">return_df</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_arr</span><span class="p">,</span> <span class="s2">&quot;drifted_data&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">drifted_data</span><span class="p">}</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">df</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">drifted_data</span>
+
+    <span class="k">def</span> <span class="nf">plot_normal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plots normal data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normal_flag_</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nothing initialized&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">time_arr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal_data</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span>
+            <span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">plot_anomaly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plots anomalized data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_anomaly_flag_</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nothing anomalized&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">time_arr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">anomalized_data</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span>
+            <span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">plot_drifted</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plots drifted data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_drifted_flag_</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nothing drifted&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">time_arr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">drifted_data</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span>
+            <span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Start and end time of 1st May, 2021 and 6th May, 2021 respectively.</p></li>
+<li><p>Unit process time of 15 minutes</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_time</span> <span class="o">=</span> <span class="s1">&#39;2021-05-01 00:00:00&#39;</span>
+<span class="n">end_time</span> <span class="o">=</span> <span class="s1">&#39;2021-05-06 06:00:00&#39;</span>
+<span class="n">process_time_mins</span> <span class="o">=</span> <span class="mi">15</span>
+
+<span class="n">ts</span> <span class="o">=</span> <span class="n">SyntheticTS</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span><span class="n">end_time</span><span class="p">,</span><span class="n">process_time_mins</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="what-is-the-object">
+<h3>What is the object?<a class="headerlink" href="#what-is-the-object" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Customized synthetic time series class
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parameters
+==============================
+Start time: 2021-05-01 00:00:00
+End time: 2021-05-06 06:00:00 
+Process time (minutes): 15
+        
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cannot-plot-w-o-initiating-the-process">
+<h3>Cannot plot w/o initiating the process<a class="headerlink" href="#cannot-plot-w-o-initiating-the-process" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">plot_normal</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nothing initialized
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">plot_anomaly</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nothing anomalized
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="normal-process-data">
+<h3>Normal process data<a class="headerlink" href="#normal-process-data" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">normal_process</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>normal_data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2021-05-01 00:00:00</td>
+      <td>90.593883</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021-05-01 00:15:00</td>
+      <td>102.409773</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2021-05-01 00:30:00</td>
+      <td>97.284685</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021-05-01 00:45:00</td>
+      <td>108.057631</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021-05-01 01:00:00</td>
+      <td>104.290393</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">plot_normal</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/timeseries_14_0.png" src="_images/timeseries_14_0.png" />
+</div>
+</div>
+</section>
+<section id="anomalize-the-data">
+<h3>Anomalize the data<a class="headerlink" href="#anomalize-the-data" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">anomalize</span><span class="p">()</span>
+<span class="n">df2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>anomaly_data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2021-05-01 00:00:00</td>
+      <td>90.593883</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021-05-01 00:15:00</td>
+      <td>102.409773</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2021-05-01 00:30:00</td>
+      <td>97.284685</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021-05-01 00:45:00</td>
+      <td>108.057631</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021-05-01 01:00:00</td>
+      <td>104.290393</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">plot_anomaly</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/timeseries_17_0.png" src="_images/timeseries_17_0.png" />
+</div>
+</div>
+</section>
+<section id="one-sided-anomaly">
+<h3>One-sided anomaly<a class="headerlink" href="#one-sided-anomaly" title="Permalink to this headline">#</a></h3>
+<p>We set <code class="docutils literal notranslate"><span class="pre">one_sided=True</span></code> in the <code class="docutils literal notranslate"><span class="pre">anomalize</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">anomalize</span><span class="p">(</span><span class="n">anomaly_frac</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                   <span class="n">anomaly_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                   <span class="n">one_sided</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">plot_anomaly</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/timeseries_19_0.png" src="_images/timeseries_19_0.png" />
+</div>
+</div>
+</section>
+<section id="varying-scales-of-anomaly">
+<h3>Varying scales of anomaly<a class="headerlink" href="#varying-scales-of-anomaly" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">SyntheticTS</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span><span class="n">end_time</span><span class="p">,</span><span class="n">process_time_mins</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">normal_process</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">anomaly_scales</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">2.5</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">anomaly_scales</span><span class="p">:</span>
+    <span class="n">ts</span><span class="o">.</span><span class="n">anomalize</span><span class="p">(</span><span class="n">anomaly_frac</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">anomaly_scale</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">ts</span><span class="o">.</span><span class="n">plot_anomaly</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/timeseries_21_0.png" src="_images/timeseries_21_0.png" />
+<img alt="_images/timeseries_21_1.png" src="_images/timeseries_21_1.png" />
+<img alt="_images/timeseries_21_2.png" src="_images/timeseries_21_2.png" />
+<img alt="_images/timeseries_21_3.png" src="_images/timeseries_21_3.png" />
+<img alt="_images/timeseries_21_4.png" src="_images/timeseries_21_4.png" />
+</div>
+</div>
+</section>
+<section id="varying-fraction-of-anomalies-1-to-40">
+<h3>Varying fraction of anomalies (1% to 40%)<a class="headerlink" href="#varying-fraction-of-anomalies-1-to-40" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">SyntheticTS</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span><span class="n">end_time</span><span class="p">,</span><span class="n">process_time_mins</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">normal_process</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">anomaly_fractions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.4</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">anomaly_fractions</span><span class="p">:</span>
+    <span class="n">ts</span><span class="o">.</span><span class="n">anomalize</span><span class="p">(</span><span class="n">anomaly_frac</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">anomaly_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">ts</span><span class="o">.</span><span class="n">plot_anomaly</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/timeseries_23_0.png" src="_images/timeseries_23_0.png" />
+<img alt="_images/timeseries_23_1.png" src="_images/timeseries_23_1.png" />
+<img alt="_images/timeseries_23_2.png" src="_images/timeseries_23_2.png" />
+<img alt="_images/timeseries_23_3.png" src="_images/timeseries_23_3.png" />
+<img alt="_images/timeseries_23_4.png" src="_images/timeseries_23_4.png" />
+</div>
+</div>
+</section>
+<section id="introduce-a-positive-drift">
+<h3>Introduce a positive drift<a class="headerlink" href="#introduce-a-positive-drift" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>No <code class="docutils literal notranslate"><span class="pre">time_drift</span></code> is mentioned. This will introduce the drift at the middle of the array i.e. at a time point which is exactly halfway between <code class="docutils literal notranslate"><span class="pre">start_time</span></code> and <code class="docutils literal notranslate"><span class="pre">end_time</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">drifted</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">drift</span><span class="p">(</span><span class="n">pct_drift_mean</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">plot_drifted</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/timeseries_25_0.png" src="_images/timeseries_25_0.png" />
+</div>
+</div>
+</section>
+<section id="negative-drift-at-an-arbitrary-location">
+<h3>Negative drift at an arbitrary location<a class="headerlink" href="#negative-drift-at-an-arbitrary-location" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">time_drift='2021-05-04</span> <span class="pre">12:00:00'</span></code> is given with a negative mean drift</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_time</span> <span class="o">=</span> <span class="s1">&#39;2021-05-01 00:00:00&#39;</span>
+<span class="n">end_time</span> <span class="o">=</span> <span class="s1">&#39;2021-05-06 06:00:00&#39;</span>
+<span class="n">process_time_mins</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">SyntheticTS</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span><span class="n">end_time</span><span class="p">,</span><span class="n">process_time_mins</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">normal_process</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">plot_normal</span><span class="p">()</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">anomalize</span><span class="p">(</span><span class="n">anomaly_frac</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span><span class="n">anomaly_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">plot_anomaly</span><span class="p">()</span>
+
+<span class="n">drifted</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">drift</span><span class="p">(</span><span class="n">pct_drift_mean</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span>
+                 <span class="n">pct_drift_spread</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                <span class="n">time_drift</span><span class="o">=</span><span class="s1">&#39;2021-05-04 12:00:00&#39;</span><span class="p">)</span>
+<span class="n">ts</span><span class="o">.</span><span class="n">plot_drifted</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/timeseries_27_0.png" src="_images/timeseries_27_0.png" />
+<img alt="_images/timeseries_27_1.png" src="_images/timeseries_27_1.png" />
+<img alt="_images/timeseries_27_2.png" src="_images/timeseries_27_2.png" />
+</div>
+</div>
+</section>
+<section id="chunked-group-of-anomalies">
+<h3>Chunked (group) of anomalies<a class="headerlink" href="#chunked-group-of-anomalies" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Anomalies in </span><span class="si">{</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2"> chunks&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">SyntheticTS</span><span class="p">(</span><span class="n">process_time_mins</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ts</span><span class="o">.</span><span class="n">normal_process</span><span class="p">()</span>
+    <span class="n">cd</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">chunk_anomalize</span><span class="p">(</span><span class="n">anomaly_frac</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">num_chunks</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">anomaly_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">return_df</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cd</span><span class="p">)),</span> <span class="n">cd</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span>
+                <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 2 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_29_1.png" src="_images/timeseries_29_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 3 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_29_3.png" src="_images/timeseries_29_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 4 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_29_5.png" src="_images/timeseries_29_5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 5 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_29_7.png" src="_images/timeseries_29_7.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 6 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_29_9.png" src="_images/timeseries_29_9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 7 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_29_11.png" src="_images/timeseries_29_11.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 8 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_29_13.png" src="_images/timeseries_29_13.png" />
+</div>
+</div>
+</section>
+<section id="one-sided-chunked-anomalies">
+<h3>One-sided chunked anomalies<a class="headerlink" href="#one-sided-chunked-anomalies" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Anomalies in </span><span class="si">{</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2"> chunks&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">SyntheticTS</span><span class="p">(</span><span class="n">process_time_mins</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ts</span><span class="o">.</span><span class="n">normal_process</span><span class="p">()</span>
+    <span class="n">cd</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">chunk_anomalize</span><span class="p">(</span><span class="n">anomaly_frac</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">num_chunks</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+                          <span class="n">anomaly_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">one_sided</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">return_df</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cd</span><span class="p">)),</span> <span class="n">cd</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span>
+                <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 2 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_31_1.png" src="_images/timeseries_31_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 3 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_31_3.png" src="_images/timeseries_31_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 4 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_31_5.png" src="_images/timeseries_31_5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 5 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_31_7.png" src="_images/timeseries_31_7.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 6 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_31_9.png" src="_images/timeseries_31_9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 7 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_31_11.png" src="_images/timeseries_31_11.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anomalies in 8 chunks
+==================================================
+</pre></div>
+</div>
+<img alt="_images/timeseries_31_13.png" src="_images/timeseries_31_13.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -803,6 +803,15 @@ with your book. For more information about this, see <a class="reference externa
 # Least-squares regression
 fit &lt;- lm(totemp ~ gnp)
 # Display the coefficients of the fit.
+</pre></div>
+</div>
+</div>
+</div>
+<p>(Intercept)          gnp
+5.184359e+04 3.475229e-02</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span>
 print(fit$coefficients)
 # Plot the data points.
 plot(gnp, totemp)
@@ -830,7 +839,27 @@ abline(fit)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<img alt="_images/notebooks_15_6.png" src="_images/notebooks_15_6.png" />
+<img alt="_images/notebooks_17_6.png" src="_images/notebooks_17_6.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span>
+class(fit$coefficients)
+class(fit$coefficients)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> &quot;numeric&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 </section>
