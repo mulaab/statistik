@@ -529,12 +529,20 @@ with your book. For more information about this, see <a class="reference externa
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">rpy2.robjects</span> <span class="k">as</span> <span class="nn">ro</span>
-<span class="kn">from</span> <span class="nn">rpy2.robjects.packages</span> <span class="kn">import</span> <span class="n">importr</span>
-<span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="kn">import</span> <span class="n">pandas2ri</span>
-
-<span class="kn">from</span> <span class="nn">rpy2.robjects.conversion</span> <span class="kn">import</span> <span class="n">localconverter</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.datasets</span> <span class="k">as</span> <span class="nn">sd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/statsmodels/tools/_testing.py:19: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+  import pandas.util.testing as tm
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">sd</span><span class="o">.</span><span class="n">longley</span><span class="o">.</span><span class="n">load_pandas</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -548,150 +556,204 @@ with your book. For more information about this, see <a class="reference externa
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span>
-data(iris)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">endog_name</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">exog_name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;TOTEMP&#39;, [&#39;GNPDEFL&#39;, &#39;GNP&#39;, &#39;UNEMP&#39;, &#39;ARMED&#39;, &#39;POP&#39;, &#39;YEAR&#39;])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">R</span>
-head(iris)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">endog</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">exog</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Sepal.Length
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Sepal.Width
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Petal.Length
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Petal.Width
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Species
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          5.1
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         3.5
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          1.4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         0.2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  setosa
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          4.9
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         3.0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          1.4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         0.2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  setosa
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          4.7
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         3.2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          1.3
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         0.2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  setosa
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          4.6
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         3.1
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          1.5
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         0.2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  setosa
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          5.0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         3.6
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          1.4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         0.2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  setosa
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          5.4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         3.9
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          1.7
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         0.4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  setosa
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GNPDEFL</th>
+      <th>GNP</th>
+      <th>UNEMP</th>
+      <th>ARMED</th>
+      <th>POP</th>
+      <th>YEAR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>83.0</td>
+      <td>234289.0</td>
+      <td>2356.0</td>
+      <td>1590.0</td>
+      <td>107608.0</td>
+      <td>1947.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>88.5</td>
+      <td>259426.0</td>
+      <td>2325.0</td>
+      <td>1456.0</td>
+      <td>108632.0</td>
+      <td>1948.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>88.2</td>
+      <td>258054.0</td>
+      <td>3682.0</td>
+      <td>1616.0</td>
+      <td>109773.0</td>
+      <td>1949.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>89.5</td>
+      <td>284599.0</td>
+      <td>3351.0</td>
+      <td>1650.0</td>
+      <td>110929.0</td>
+      <td>1950.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>96.2</td>
+      <td>328975.0</td>
+      <td>2099.0</td>
+      <td>3099.0</td>
+      <td>112075.0</td>
+      <td>1951.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>98.1</td>
+      <td>346999.0</td>
+      <td>1932.0</td>
+      <td>3594.0</td>
+      <td>113270.0</td>
+      <td>1952.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>99.0</td>
+      <td>365385.0</td>
+      <td>1870.0</td>
+      <td>3547.0</td>
+      <td>115094.0</td>
+      <td>1953.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>100.0</td>
+      <td>363112.0</td>
+      <td>3578.0</td>
+      <td>3350.0</td>
+      <td>116219.0</td>
+      <td>1954.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>101.2</td>
+      <td>397469.0</td>
+      <td>2904.0</td>
+      <td>3048.0</td>
+      <td>117388.0</td>
+      <td>1955.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>104.6</td>
+      <td>419180.0</td>
+      <td>2822.0</td>
+      <td>2857.0</td>
+      <td>118734.0</td>
+      <td>1956.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>108.4</td>
+      <td>442769.0</td>
+      <td>2936.0</td>
+      <td>2798.0</td>
+      <td>120445.0</td>
+      <td>1957.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>110.8</td>
+      <td>444546.0</td>
+      <td>4681.0</td>
+      <td>2637.0</td>
+      <td>121950.0</td>
+      <td>1958.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>112.6</td>
+      <td>482704.0</td>
+      <td>3813.0</td>
+      <td>2552.0</td>
+      <td>123366.0</td>
+      <td>1959.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>114.2</td>
+      <td>502601.0</td>
+      <td>3931.0</td>
+      <td>2514.0</td>
+      <td>125368.0</td>
+      <td>1960.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>115.7</td>
+      <td>518173.0</td>
+      <td>4806.0</td>
+      <td>2572.0</td>
+      <td>127852.0</td>
+      <td>1961.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>116.9</td>
+      <td>554894.0</td>
+      <td>4007.0</td>
+      <td>2827.0</td>
+      <td>130081.0</td>
+      <td>1962.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
