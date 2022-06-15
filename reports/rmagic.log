@@ -17,14 +17,10 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-data_frame
+ %%R
+ data_frame <- read.csv("https://goo.gl/j6lRXD")
 ------------------
 
-[0;31m[0m
-[0;31mNameError[0mTraceback (most recent call last)
-[0;32m<ipython-input-3-2480fe6c1a2b>[0m in [0;36m<module>[0;34m()[0m
-[0;32m----> 1[0;31m [0mdata_frame[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;31mNameError[0m: name 'data_frame' is not defined
-NameError: name 'data_frame' is not defined
+
+UsageError: Cell magic `%%R` not found.
 
